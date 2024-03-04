@@ -23,3 +23,7 @@
         state: in_progress
         other:
           problem_id: PRB0040007
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
