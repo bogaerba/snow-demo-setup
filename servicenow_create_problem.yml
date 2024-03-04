@@ -1,0 +1,25 @@
+---
+- name: Sample playbook
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: create a problem
+      servicenow.itsm.problem:
+        short_description: IEF450I #CMCY9HG MCX8P02 MCX8001 - ABEND=S000 U0016 REASON=00000000
+        state: new
+        description: IEF450I #CMCY9HG MCX8P02 MCX8001 - ABEND=S000 U0016 REASON=00000000
+        impact: high
+        urgency: low
+        # Instance data
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+      register: result
+    - name: Update incident with a problem information
+      servicenow.itsm.incident:
+        number: INC0010001
+        state: in_progress
+        other:
+          problem_id: PRB0040007
