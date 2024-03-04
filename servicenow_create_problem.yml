@@ -22,7 +22,7 @@
         number: INC0010001
         state: in_progress
         other:
-          problem_id: PRB0040007
+          problem_id: PRB0040009
         instance:
           host: https://dev213519.service-now.com
           username: admin
