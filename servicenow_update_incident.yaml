@@ -1,0 +1,26 @@
+---
+- name: Sample playbook
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create a new incident
+      servicenow.itsm.incident:
+        # Instance data
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+    - name: update incident
+      servicenow.itsm.incident:
+        # Instance data
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+        number: INC0010001
+        state: scheduled
+        description: Patching started
+        impact: high
+        urgency: high
+      register: result
