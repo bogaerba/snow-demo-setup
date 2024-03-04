@@ -6,9 +6,9 @@
   tasks:
     - name: create a problem
       servicenow.itsm.problem:
-        short_description: IEF450I #CMCY9HG MCX8P02 MCX8001 - ABEND=S000 U0016 REASON=00000000
+        short_description: "IEF450I #CMCY9HG MCX8P02 MCX8001 - ABEND=S000 U0016 REASON=00000000"
         state: new
-        description: IEF450I #CMCY9HG MCX8P02 MCX8001 - ABEND=S000 U0016 REASON=00000000
+        description: "IEF450I #CMCY9HG MCX8P02 MCX8001 - ABEND=S000 U0016 REASON=00000000"
         impact: high
         urgency: low
         # Instance data
