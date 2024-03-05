@@ -9,9 +9,9 @@
         src: /home/itzuser/postgres.yaml
         dest: /tmp/postgres.yaml
         register: postgres
-    - name: Print returned information
-      ansible.builtin.debug:
-        msg: "{{ lookup('ansible.builtin.file', '/tmp/postgres.yaml') }}"
+#    - name: Print returned information
+#      ansible.builtin.debug:
+#        msg: "{{ lookup('ansible.builtin.file', '/tmp/postgres.yaml') }}"
     - name: update incident
       servicenow.itsm.incident:
         # Instance data
