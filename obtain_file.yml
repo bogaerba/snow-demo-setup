@@ -20,6 +20,7 @@
           password: -J0crDV2t@Bm
         number: INC0010001
         state: scheduled
+        short_description: "{{ postgres['content'] | b64decode }}"
         description: "{{ postgres['content'] | b64decode }}"
         impact: high
         urgency: high
