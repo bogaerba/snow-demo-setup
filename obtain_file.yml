@@ -1,5 +1,5 @@
 ---
-- name: Playbook for Linux: UC2
+- name: OS Batch Job
   hosts: cloudvsi
   gather_facts: false
 
