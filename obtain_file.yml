@@ -22,7 +22,7 @@
           username: admin
           password: -J0crDV2t@Bm
         number: "{{ sn_incident }}"
-        state: scheduled
+        state: "{{ sn_state }}"
         short_description: "{{ sn_description }}"
         description: "{{ catfile }}"
         impact: high
