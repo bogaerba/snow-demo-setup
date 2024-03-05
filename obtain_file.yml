@@ -7,8 +7,8 @@
     - name: connect to system & get log file
       ansible.builtin.fetch:
         src: /home/itzuser/postgres.yaml
-        dest: postgres.yaml
+        dest: postgres
         flat: yes
     - name: Print returned information
       ansible.builtin.debug:
-        msg: "{{ postgres.yaml['content'] }}"
+        msg: "{{ postgres['content'] }}"
