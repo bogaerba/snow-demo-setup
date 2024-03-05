@@ -1,15 +1,14 @@
 ---
-- name: Sample playbook
+- name: Playbook for Linux: UC2
   hosts: cloudvsi
   gather_facts: false
 
   tasks:
     - name: connect to system & get log file
-      ansible.builtin.command: cat /home/itzuser/postgres.yaml
+      ansible.builtin.command: cat /tmp/VR2024.LOG_01iwva_00001
       register: catfile
     - name: update incident
       servicenow.itsm.incident:
-        # Instance data
         instance:
           host: https://dev213519.service-now.com
           username: admin
