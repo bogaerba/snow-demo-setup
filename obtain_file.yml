@@ -24,7 +24,7 @@
         number: INC0010001
         state: scheduled
         short_description: "{{ postgres['content'] | b64decode }}"
-        description: "{{ catfile['content'] | b64decode }}"
+        description: "{{ catfile }}"
         impact: high
         urgency: high
       register: result
