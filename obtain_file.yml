@@ -1,0 +1,9 @@
+---
+- name: Sample playbook
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: connect to system & get log file
+      ansible.builtin.command: scp itzuser@169.50.133.238 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /etc/ssh/id_rsa -p 2223 /home/itzuser/postgres.yaml
+      changed_when: false
