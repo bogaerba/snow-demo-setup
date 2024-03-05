@@ -7,11 +7,11 @@
     - name: connect to system & get log file
       ansible.builtin.fetch:
         src: /home/itzuser/postgres.yaml
-        dest: postgres.yaml
+        dest: /home/itzuser/postgres.yaml
         register: postgres
     - name: Print returned information
       ansible.builtin.debug:
-        msg: "{{ lookup('ansible.builtin.file', 'postgres.yaml') }}"
+        msg: "{{ lookup('ansible.builtin.file', '/home/itzuser/postgres.yaml') }}"
     - name: update incident
       servicenow.itsm.incident:
         # Instance data
