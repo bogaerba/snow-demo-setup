@@ -8,6 +8,9 @@
       ansible.builtin.slurp:
         src: /home/itzuser/postgres.yaml
       register: postgres
+    - name: cat file
+      ansible.builtin.command: cat /home/itzuser/postgres.yaml
+      register: catfile
     #- name: Print returned information
     #  ansible.builtin.debug:
     #    msg: "the value of foo.txt is {{ lookup('ansible.builtin.file', 'postgres') }}"
@@ -21,7 +24,7 @@
         number: INC0010001
         state: scheduled
         short_description: "{{ postgres['content'] | b64decode }}"
-        description: "{{ postgres['content'] | b64decode }}"
+        description: "{{ catfile['content'] | b64decode }}"
         impact: high
         urgency: high
       register: result
