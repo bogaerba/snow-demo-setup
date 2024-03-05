@@ -8,7 +8,20 @@
       ansible.builtin.fetch:
         src: /home/itzuser/postgres.yaml
         dest: postgres.yaml
-        result: postgres
+        register: postgres
     - name: Print returned information
       ansible.builtin.debug:
-        msg: "{{ postgres['content'] }}"
+        msg: "{{ lookup('ansible.builtin.file', 'postgres.yaml') }}"
+    - name: update incident
+      servicenow.itsm.incident:
+        # Instance data
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+        number: INC0010001
+        state: scheduled
+        description: "{{ postgres['content'] }}"
+        impact: high
+        urgency: high
+      register: result
