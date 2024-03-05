@@ -8,7 +8,7 @@
       ansible.builtin.fetch:
         src: /home/itzuser/postgres.yaml
         dest: /tmp/postgres.yaml
-        register: postgres
+      register: postgres
 #    - name: Print returned information
 #      ansible.builtin.debug:
 #        msg: "the value of foo.txt is {{ lookup('ansible.builtin.file', '/tmp/postgres.yaml') }}"
@@ -21,7 +21,7 @@
           password: -J0crDV2t@Bm
         number: INC0010001
         state: scheduled
-        description: "the value of foo.txt is {{ lookup('ansible.builtin.file', '/tmp/postgres.yaml') }}"
+        description: "{{ postgres['content'] }}"
         impact: high
         urgency: high
       register: result
