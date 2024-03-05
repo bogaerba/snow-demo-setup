@@ -21,7 +21,7 @@
           password: -J0crDV2t@Bm
         number: INC0010001
         state: scheduled
-        description: "{{ postgres['content'] }}"
+        description: {{ postgres }}"
         impact: high
         urgency: high
       register: result
