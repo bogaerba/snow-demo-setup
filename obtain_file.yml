@@ -9,9 +9,9 @@
         src: /home/itzuser/postgres.yaml
         dest: /tmp/postgres.yaml
       register: postgres
-#    - name: Print returned information
-#      ansible.builtin.debug:
-#        msg: "the value of foo.txt is {{ lookup('ansible.builtin.file', '/tmp/postgres.yaml') }}"
+    - name: Print returned information
+      ansible.builtin.debug:
+        msg: "the value of foo.txt is {{ lookup('ansible.builtin.file', '/tmp/postgres.yaml') }}"
     - name: update incident
       servicenow.itsm.incident:
         # Instance data
@@ -21,7 +21,7 @@
           password: -J0crDV2t@Bm
         number: INC0010001
         state: scheduled
-        description: "{{ postgres['content'] | b64decode }}"
+        description: '{{ postgres[content] }}'
         impact: high
         urgency: high
       register: result
