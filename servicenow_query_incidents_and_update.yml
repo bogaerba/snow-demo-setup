@@ -14,7 +14,7 @@
       user: admin
       password: -J0crDV2t@Bm
       return_content: true
-    register: result
+    register: output
   - name: show results
     ansible.builtin.debug:
-      msg: "{{ result.content.result[0].number }}"
+      msg: "{{ output.content.result[0].number }}"
