@@ -23,7 +23,6 @@
       incidents: "{{ output | json_query(jmesquery) }}"
     vars:
       jmesquery: '*.output[*].[result]'
-
   - name: print incidents
     debug:
       msg: "{{ item }}"
