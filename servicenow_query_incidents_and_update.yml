@@ -17,4 +17,4 @@
     register: result
   - name: show results
     ansible.builtin.debug:
-      msg: "{{ result }}"
+      msg: "{{ result.msg.content.result[0].number }}"
