@@ -5,7 +5,7 @@
   gather_facts: false
 
   tasks:
-   - name: obtain servicenow knowledge
+   - name: obtain servicenow incident
      ansible.builtin.uri:
        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_description%3DInconsistent%20Data&sysparm_limit=1
        method: GET
@@ -15,10 +15,6 @@
        user: admin
        password: -J0crDV2t@Bm
      register: result
-  - name: Create a new incident
-    servicenow.itsm.incident:
-    # Instance data
-    instance:
-      host: https://dev213519.service-now.com
-      username: admin
-      password: -J0crDV2t@Bm
+    - name: show results
+      ansible.builtin.debug:
+        msg: "{{ result }}"
