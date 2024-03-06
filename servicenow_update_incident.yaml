@@ -19,7 +19,7 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: "{{ sn_incident.number }}"
+        number: "{{ sn_incident.record.number }}"
         state: scheduled
         description: Patching started
         impact: high
