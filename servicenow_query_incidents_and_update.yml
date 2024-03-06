@@ -13,6 +13,7 @@
         Accept: application/json
       user: admin
       password: -J0crDV2t@Bm
+      return_content: true
     register: result
   - name: show results
     ansible.builtin.debug:
