@@ -30,5 +30,5 @@
           password: -J0crDV2t@Bm
         number: "{{ sn_incident }}"
         state: "{{ sn_state }}"
-        short_description: "{{ sn_description }}"
+        short_description: "{{ sn_query }}"
         description: "{{ catfile }}"
