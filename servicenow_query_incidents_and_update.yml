@@ -15,16 +15,16 @@
       password: -J0crDV2t@Bm
       return_content: true
     register: output
-#  - name: show results
-#    ansible.builtin.debug:
-#      msg: "{{ output.result[0].number }}"
-  - name: parse output
-    set_fact:
-      incidents: "{{ output | json_query(jmesquery) }}"
-    vars:
-      jmesquery: '*.output[*].[result]'
-  - name: print incidents
-    debug:
-      msg: "{{ item }}"
-    with_items:
-    - "{{ incidents }}"
+  - name: show results
+    ansible.builtin.debug:
+      msg: "{{ output.json.result[0].number }}"
+#  - name: parse output
+#    set_fact:
+#      incidents: "{{ output | json_query(jmesquery) }}"
+#    vars:
+#      jmesquery: '*.output[*].[result]'
+#  - name: print incidents
+#    debug:
+#      msg: "{{ item }}"
+#    with_items:
+#    - "{{ incidents }}"
