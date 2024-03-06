@@ -6,7 +6,7 @@
   tasks:
   - name: obtain servicenow incident
     ansible.builtin.uri:
-      url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_description%3DInconsistent%20Data&sysparm_limit=1
+      url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_description%3D{{ sn_query }}&sysparm_limit=1
       method: GET
       headers:
         Content-Type: application/json
