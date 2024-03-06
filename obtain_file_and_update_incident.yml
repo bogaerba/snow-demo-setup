@@ -1,0 +1,19 @@
+---
+- name: Linux Batch Job
+  hosts: cloudvsi
+  gather_facts: false
+
+  tasks:
+    - name: connect to system & get log file
+      ansible.builtin.command: cat /tmp/VR2024.LOG_01iwva_00001
+      register: catfile
+    - name: update incident
+      servicenow.itsm.incident:
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+        number: "{{ sn_incident }}"
+        state: "{{ sn_state }}"
+        short_description: "{{ sn_description }}"
+        description: "{{ catfile }}"
