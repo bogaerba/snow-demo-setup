@@ -1,5 +1,4 @@
 ---
-
 - name: Query incidents and update
   hosts: localhost
   gather_facts: false
