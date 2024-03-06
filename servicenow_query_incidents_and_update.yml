@@ -14,6 +14,6 @@
        user: admin
        password: -J0crDV2t@Bm
      register: result
-    - name: show results
-      ansible.builtin.debug:
-        msg: "{{ result }}"
+  - name: show results
+    ansible.builtin.debug:
+      msg: "{{ result }}"
