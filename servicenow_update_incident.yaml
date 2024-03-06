@@ -1,5 +1,5 @@
 ---
-- name: Sample playbook
+- name: Update incident
   hosts: localhost
   gather_facts: false
 
@@ -11,6 +11,7 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
+      register: sn_number
     - name: update incident
       servicenow.itsm.incident:
         # Instance data
@@ -18,7 +19,7 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: INC0010001
+        number: "{{ sn_number }}"
         state: scheduled
         description: Patching started
         impact: high
