@@ -18,10 +18,10 @@
         password: -J0crDV2t@Bm
         return_content: true
       register: output
-    - name: get incident number
+    - name: show incident number
       ansible.builtin.debug:
         msg: "{{ output.json.result[0].number }}"
-    - name: show incident number
+    - name: put incident number into variable
       ansible.builtin.set_fact:
         sn_incident: "{{ output.json.result[0].number }}"
     - name: update incident
