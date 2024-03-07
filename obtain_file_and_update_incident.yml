@@ -9,7 +9,7 @@
       register: catfile
     - name: obtain servicenow incident
       ansible.builtin.uri:
-        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=descriptionLIKE{{ sn_query }}&sysparm_limit=10
+        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_descriptionLIKE{{ sn_query }}&sysparm_limit=10
         method: GET
         headers:
           Content-Type: application/json
