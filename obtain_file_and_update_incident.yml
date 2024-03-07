@@ -30,6 +30,6 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: "{{ sn_incident }}" "{{ sn_incident_survey }}"
+        number: "{{ sn_incident }}{{ sn_incident_survey }}"
         state: "{{ sn_state }}"
         description: "{{ catfile }}"
