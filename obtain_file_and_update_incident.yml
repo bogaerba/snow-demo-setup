@@ -21,7 +21,7 @@
     - name: get incident number
       ansible.builtin.set_fact:
         sn_incident: "{{ output.json.result[0].number }}"
-      when: '"INC" in output.json.result'
+      when: '"INC" in output.json.result[0].number'
       register: result
     - name: return result
       ansible.builtin.debug:
