@@ -9,7 +9,7 @@
       register: catfile
     - name: obtain servicenow incident
       ansible.builtin.uri:
-        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_description%3D{{ sn_query }}&sysparm_limit=10
+        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=descriptionLIKE{{ sn_query }}&sysparm_limit=10
         method: GET
         headers:
           Content-Type: application/json
@@ -30,7 +30,6 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: "{{ sn_incident }}"
+        number: "{{ sn_incident }}" "{{ sn_incident_survey }}"
         state: "{{ sn_state }}"
-        short_description: "{{ sn_query }}"
         description: "{{ catfile }}"
