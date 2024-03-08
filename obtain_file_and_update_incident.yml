@@ -21,15 +21,16 @@
     - name: get incident number
       ansible.builtin.set_fact:
         sn_incident: "{{ output.json.result[0].number }}"
-      when: '"INC" in output.json.result[0].number'
+      when: output is defined
       register: result
+      ignore_errors: true
     - name: return result
       ansible.builtin.debug:
         msg: "{{ result }}"
     - name: check whether incident has been found
       ansible.builtin.set_fact:
         sn_incident: "{{ sn_incident_survey }}"
-      when: sn_incident == ""
+      when: result is failed
     - name: show incident number
       ansible.builtin.debug:
         msg: "{{ sn_incident }}"
