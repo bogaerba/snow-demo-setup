@@ -1,0 +1,63 @@
+---
+- name: Handle MQ events and look up solution
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create a new incident
+      servicenow.itsm.incident:
+        # Instance data
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+        short_description: A00864WOPA for BO.VERK.STORE.001.STOREWF.COWOAVAILABILSVC
+      register: sn_incident
+    - name: update incident
+      servicenow.itsm.incident:
+        # Instance data
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+        number: "{{ sn_incident.record.number }}"
+        state: in_progress
+      register: result
+    - name: connect to system & get log file
+      ansible.builtin.command: cat /tmp/VR2024.LOG_01iwva_00001
+      register: catfile
+    - name: obtain servicenow incident
+      ansible.builtin.uri:
+        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_descriptionLIKE{{ sn_query }}&sysparm_limit=10
+        method: GET
+        headers:
+          Content-Type: application/json
+          Accept: application/json
+        user: admin
+        password: -J0crDV2t@Bm
+        return_content: true
+      register: output
+    - name: get incident number
+      ansible.builtin.set_fact:
+        sn_incident: "{{ output.json.result[0].number }}"
+      when: output is defined
+      register: result
+      ignore_errors: true
+    - name: return result
+      ansible.builtin.debug:
+        msg: "{{ result }}"
+    - name: check whether incident has been found
+      ansible.builtin.set_fact:
+        sn_incident: "{{ sn_incident_survey }}"
+      when: result is failed
+    - name: show incident number
+      ansible.builtin.debug:
+        msg: "{{ sn_incident }}"
+    - name: update incident
+      servicenow.itsm.incident:
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+        number: "{{ sn_incident }}"
+        description: "{{ catfile }}"
