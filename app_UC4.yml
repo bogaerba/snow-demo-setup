@@ -9,7 +9,7 @@
       register: status
     - name: show status
       ansible.builtin.debug:
-        msg: "{{ status }}"
+        msg: "{{ status.stdout.split('\n') }}"
 #    - name: obtain servicenow incident
 #      ansible.builtin.uri:
 #        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_descriptionLIKE{{ sn_query }}&sysparm_limit=10
