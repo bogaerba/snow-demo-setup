@@ -5,7 +5,7 @@
 
   tasks:
     - name: connect to system & check status
-      ansible.builtin.command: kubectl get cores -n instana-core
+      ansible.builtin.command: sudo bash -c "export PATH=$PATH:/usr/local/bin:/root && kubectl get cores -n instana-core"
       register: status
     - name: show status
       ansible.builtin.debug:
