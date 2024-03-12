@@ -4,17 +4,20 @@
   gather_facts: false
 
   tasks:
-    - name: connect to system & get log file
-      ansible.builtin.command: cat /tmp/VR2024.LOG_01iwva_00001
-      register: catfile
-    - name: obtain servicenow incident
-      ansible.builtin.uri:
-        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_descriptionLIKE{{ sn_query }}&sysparm_limit=10
-        method: GET
-        headers:
-          Content-Type: application/json
-          Accept: application/json
-        user: admin
-        password: -J0crDV2t@Bm
-        return_content: true
-      register: output
+    - name: connect to system & check status
+      ansible.builtin.command: kubectl get cores -n instana-core
+      register: status
+    - name: show status
+      ansible.builtin.debug:
+        msg: "{{ status }}"
+#    - name: obtain servicenow incident
+#      ansible.builtin.uri:
+#        url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_descriptionLIKE{{ sn_query }}&sysparm_limit=10
+#        method: GET
+#        headers:
+#          Content-Type: application/json
+#          Accept: application/json
+#        user: admin
+#        password: -J0crDV2t@Bm
+#        return_content: true
+#      register: output
