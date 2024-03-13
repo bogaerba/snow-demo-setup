@@ -5,7 +5,7 @@
 
   tasks:
     - name: create an incident
-      servicenow.itsm.problem:
+      servicenow.itsm.incident:
         short_description: "{{ short_description }}"
         description: "{{ description }}"
         caller: "{{ caller }}"
