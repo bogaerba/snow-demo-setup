@@ -26,6 +26,7 @@
     - name: report that application is not ready
       ansible.builtin.debug:
         msg: "Application is not ready. Incident {{ sn_notready_incident.record.number }} has been created and ombuds called with the following details: {{ result.stdout.split('\n') }}"
+      ignore_errors: true
       when: sn_notready_incident is defined
     - name: detect reachability
       ansible.builtin.uri:
