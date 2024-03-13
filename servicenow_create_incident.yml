@@ -1,0 +1,21 @@
+---
+- name: Create ServiceNow incident
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: create an incident
+      servicenow.itsm.problem:
+        short_description: "{{ short_description }}"
+        description: "{{ description }}"
+        caller: "{{ caller }}"
+        impact: medium
+        urgency: medium
+        instance:
+          host: https://dev213519.service-now.com
+          username: admin
+          password: -J0crDV2t@Bm
+      register: result
+    - name: show incident number
+      ansible.builtin.debug:
+        msg: "{{ result.record.number }}"
