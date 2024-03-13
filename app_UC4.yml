@@ -6,36 +6,36 @@
   tasks:
     - name: connect to system & check readiness
       ansible.builtin.command: sudo bash -c "export PATH=$PATH:/usr/local/bin:/root && kubectl get cores -n instana-core"
-      register: ready
+      register: result
       ignore_errors: true
     - name: show status
       ansible.builtin.debug:
-        msg: "{{ ready.stdout.split('\n') }}"
+        msg: "{{ result.stdout.split('\n') }}"
     - name: raise incident and call the ombuds if the application is not ready
       servicenow.itsm.incident:
         instance:
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        short_description: Application is not ready
-        description: Application core is not ready. Ombuds has been called
+        short_description: Application is not ready. Ombuds has been called
+        description: "{{ result.stdout.split('\n') }}"
         impact: high
         urgency: high
       register: sn_notready_incident
-      when: ready.stdout.find('Ready                 Ready') == -1
+      when: result.stdout.find('Ready                 Ready') == -1
     - name: report that application is not ready
       ansible.builtin.debug:
-        msg: "Application is not ready. Incident {{ sn_notready_incident }} has been created and ombuds called with the following details: {{ ready.stdout.split('\n') }}"
+        msg: "Application is not ready. Incident {{ sn_notready_incident.record.number }} has been created and ombuds called with the following details: {{ result.stdout.split('\n') }}"
       when: sn_notready_incident is defined
     - name: detect reachability
       ansible.builtin.uri:
-        url: https://data-minfin.instana.itz-2700036tyq-95oc.dte.demo.ibmcloud.com
+        url: https://data-minfin.instana.itz-2700036tyq-95oc.dte.demo.ibmcloud.coms
         return_content: true
         validate_certs: false
         follow_redirects: none
       register: reachable
       ignore_errors: true
-      when: sn_notready_incident not defined
+      when: sn_notready_incident is undefined
     - name: raise incident and call the ombuds
       servicenow.itsm.incident:
         instance:
@@ -47,7 +47,8 @@
         impact: high
         urgency: high
       register: sn_notreachable_incident
-      when: "reachable.status != 401 or 'Ooops' in reachable.content"
+      ignore_errors: true
+      when: (sn_notready_incident is undefined) and ((reachable.status != 401) or ('Ooops' in reachable.content))
     - name: show reachability
       ansible.builtin.debug:
         msg: "Application is ready but not reachable. Incident {{ sn_notreachable_incident }} has been created with the following details: {{ reachable }}"
