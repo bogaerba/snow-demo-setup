@@ -5,8 +5,8 @@
   gather_facts: no
    
 
-  vars:
-  environment: "{{ environment_vars }}"
+  #vars:
+  #environment: "{{ environment_vars }}"
     
 
 
