@@ -11,6 +11,8 @@
         caller: "{{ caller }}"
         impact: medium
         urgency: medium
+        other:
+          cmdb_ci: "{{ host }}"    
         instance:
           host: https://dev213519.service-now.com
           username: admin
