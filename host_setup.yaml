@@ -93,7 +93,7 @@
 #                 a small max_search_depth will be much faster.
 ###############################################################################
 
-- hosts: all
+- hosts: EOLE69
   gather_facts: false
   vars:
     # minimum_zoau_version only accepts integers and "."
