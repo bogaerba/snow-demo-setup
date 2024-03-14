@@ -34,5 +34,5 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: "INC0010020"
+        number: "{{ sn_incident }}"
         description: "{{ output.json.result[0].content.split('<br />') }}"
