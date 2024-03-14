@@ -8,7 +8,6 @@
       servicenow.itsm.incident:
         short_description: "{{ short_description }}"
         description: "{{ description }}"
-        caller: "{{ caller }}"
         impact: medium
         urgency: medium
         other:
