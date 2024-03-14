@@ -12,14 +12,14 @@
   tasks: 
   - name: Query a job with a job name of                        
     zos_job_query:      
-      job_id: "{{JOBNR}}"                                    # holds the number of the JOB that went wrong
+      job_id: "{{ JOBNR }}"                                    # holds the number of the JOB that went wrong
       #job_id: "JOB02987"
     register: results
 
 # display the ret_code of the job
   - name: display the return code of job                    
     ansible.builtin.debug:
-      msg: "{{results.jobs[0].ret_code}}"                   # display the return code of the JOB with JOB=JOBNR
+      msg: "{{ results.jobs[0].ret_code }}"                   # display the return code of the JOB with JOB=JOBNR
 
 
   - name: Job output with DD names
