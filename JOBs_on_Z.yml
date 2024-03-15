@@ -4,8 +4,8 @@
     - ibm.ibm_zos_core
   gather_facts: no
 
-  vars:
-  environment: "{{ environment_vars }}"
+  #vars:
+  #environment: "{{ environment_vars }}"
     
 
 # query the JCL by means of a JOBID
