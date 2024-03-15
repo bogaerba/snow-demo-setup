@@ -2,7 +2,7 @@
 - hosts: EOLE69
   collections:
     - ibm.ibm_zos_core
-  gather_facts: yes
+  gather_facts: no
 
   vars:
   environment: "{{ environment_vars }}"
