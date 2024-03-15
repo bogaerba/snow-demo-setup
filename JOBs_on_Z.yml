@@ -39,14 +39,12 @@
     zos_find:                                                   # zos_find play for finding text in a dataset
       patterns:                                                 # define the patterns/filters: where to look
         - "{{target_DSN}}"                                      # dummy data set to be replaced by controlM log
-        #- THEWALL.COLRUYT(MEMBER1)
       contains: "{{ERROR_CODE}}"                                # the error code we are looking for put in as external variable
     register: ERROR_CODE_Found                                  # create a var that holds the result of the zos_find function
 
   - name: display found results
     ansible.builtin.debug:
       msg: "{{ERROR_CODE_Found.data_sets[0].name}}"              # peel off the data_set name in where the IEF450I was found
-      
 
   - name: search line that contains {{ERROR_CODE}}
     ansible.builtin.command: dgrep {{ERROR_CODE}} {{target_DSN}}    # use the ZOAU command to isolate the line where error was found
