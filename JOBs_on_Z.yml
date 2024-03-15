@@ -2,10 +2,10 @@
 - hosts: EOLE69
   collections:
     - ibm.ibm_zos_core
-  gather_facts: no
+  gather_facts: yes
 
-  #vars:
-  #environment: "{{ environment_vars }}"
+  vars:
+  environment: "{{ environment_vars }}"
     
 
 # query the JCL by means of a JOBID
