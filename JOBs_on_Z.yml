@@ -57,7 +57,7 @@
   - name: update incident
     servicenow.itsm.incident:
       instance:
-        host: https://dev213519.service-now.com
+        host: https://148.139.125.118
         username: admin
         password: -J0crDV2t@Bm
       number: "{{ sn_incident }}"
