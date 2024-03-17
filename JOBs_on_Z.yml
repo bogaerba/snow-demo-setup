@@ -68,7 +68,7 @@
       user: admin
       password: -J0crDV2t@Bm
       method: PATCH
-      body: "{description:{{ infoLine.stdout_lines[0] }}}"
+      body: "{'description':'{{ infoLine.stdout_lines[0] }}'}"
       force_basic_auth: true
       body_format: json
       validate_certs: false
