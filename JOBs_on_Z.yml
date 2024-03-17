@@ -60,6 +60,7 @@
         host: https://148.139.125.118
         username: admin
         password: -J0crDV2t@Bm
+        validate_certs: false
       number: "{{ sn_incident }}"
       description: "{{infoLine.stdout_lines[0]}}"
   
