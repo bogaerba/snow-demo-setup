@@ -64,7 +64,7 @@
 #      number: "{{ sn_incident }}"
 #      description: "{{infoLine.stdout_lines[0]}}"
     ansible.builtin.uri:
-      url: https://dev213519.service-now.com/api/now/table/incident/"{{ sn_incident }}"
+      url: https://dev213519.service-now.com/api/now/table/incident/{{ sn_incident }}
       user: admin
       password: -J0crDV2t@Bm
       method: PATCH
