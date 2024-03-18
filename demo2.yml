@@ -10,38 +10,38 @@
     
 
 
-# query the JCL by means of a JOBID
-  tasks: 
-  - name: Query a job with a job name of                        
-    zos_job_query:      
-      job_id: "{{JOBNR}}"                                    # holds the number of the JOB that went wrong
-      #job_id: "JOB02987"
-    register: results
+# # query the JCL by means of a JOBID
+#   tasks: 
+#   - name: Query a job with a job name of                        
+#     zos_job_query:      
+#       job_id: "{{JOBNR}}"                                    # holds the number of the JOB that went wrong
+#       #job_id: "JOB02987"
+#     register: results
 
-# display the ret_code of the job
-  - name: display the return code of job                    
-    ansible.builtin.debug:
-      msg: "{{results.jobs[0].ret_code}}"                   # display the return code of the JOB with JOB=JOBNR
+# # display the ret_code of the job
+#   - name: display the return code of job                    
+#     ansible.builtin.debug:
+#       msg: "{{results.jobs[0].ret_code}}"                   # display the return code of the JOB with JOB=JOBNR
 
 
-  - name: Job output with DD names
-    zos_job_output:
-      job_id: "{{JOBNR}}"                                   # display the output of JOB with JOBNR. JOBs have several ouputs (DD names)
-                                                            # we need to look at the DD name with name JESMSGLG to find the Return Code (RC)
-    register: JESMSGLG_output         
+#   - name: Job output with DD names
+#     zos_job_output:
+#       job_id: "{{JOBNR}}"                                   # display the output of JOB with JOBNR. JOBs have several ouputs (DD names)
+#                                                             # we need to look at the DD name with name JESMSGLG to find the Return Code (RC)
+#     register: JESMSGLG_output         
 
-  - name: display JESMSGLG
-    ansible.builtin.debug:
-      #msg: "{{JESMSGLG_output.jobs[0].ddnames[0]}}"              # we can display the whole output of DD JESMSGLG ...
-      msg: "{{JESMSGLG_output.jobs[0].ddnames[0].content[12]}}"   # ... or line 12 displaying the name of the JOB and the RC=****
+#   - name: display JESMSGLG
+#     ansible.builtin.debug:
+#       #msg: "{{JESMSGLG_output.jobs[0].ddnames[0]}}"              # we can display the whole output of DD JESMSGLG ...
+#       msg: "{{JESMSGLG_output.jobs[0].ddnames[0].content[12]}}"   # ... or line 12 displaying the name of the JOB and the RC=****
 
 ############  harde knip    ##########
 
   - name: find {{ERROR_CODE}} in dataset
     zos_find:                                                   # zos_find play for finding text in a dataset
       patterns:                                                 # define the patterns/filters: where to look
-        #- "{{target_DSN}}"                                      # dummy data set to be replaced by controlM log
-        - THEWALL.COLRUYT(MEMBER1)
+        - "{{target_DSN}}"                                      # dummy data set to be replaced by controlM log
+        #- THEWALL.COLRUYT(MEMBER1)
       contains: "{{ERROR_CODE}}"                                # the error code we are looking for put in as external variable
     register: ERROR_CODE_Found                                  # create a var that holds the result of the zos_find function
 
