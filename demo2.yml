@@ -10,8 +10,8 @@
     
 
 
-# # query the JCL by means of a JOBID
-#   tasks: 
+# query the JCL by means of a JOBID
+  tasks: 
 #   - name: Query a job with a job name of                        
 #     zos_job_query:      
 #       job_id: "{{JOBNR}}"                                    # holds the number of the JOB that went wrong
