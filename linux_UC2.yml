@@ -5,7 +5,7 @@
 
   tasks:
     - name: obtain script name
-      shell: echo "{{ sn_description }}"|awk '{ print $1 }'
+      shell: echo "{{ sn_short_description }}"|awk '{ print $1 }'
       register: script
     - name: show script name
       debug:
@@ -19,6 +19,9 @@
     - name: connect to system & get script output
       ansible.builtin.command: cat "{{ result.stdout }}"
       register: catfile
+      
+      ### IGNORE
+      
     - name: obtain servicenow incident
       ansible.builtin.uri:
         url: https://dev213519.service-now.com/api/now/table/incident?sysparm_query=short_descriptionLIKE{{ sn_query }}&sysparm_limit=10
@@ -43,6 +46,9 @@
       ansible.builtin.set_fact:
         sn_incident: "{{ sn_incident_survey }}"
       when: result is failed
+
+      ### /IGNORE
+      
     - name: show incident number
       ansible.builtin.debug:
         msg: "{{ sn_incident }}"
