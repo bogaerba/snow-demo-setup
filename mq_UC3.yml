@@ -36,5 +36,5 @@
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: {{ sn_incident }}
+        number: "{{ sn_incident }}"
         description: "{{ parsed_html.stdout_lines }}"
