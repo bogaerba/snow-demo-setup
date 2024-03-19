@@ -4,8 +4,20 @@
   gather_facts: false
 
   tasks:
-    - name: connect to system & get log file
-      ansible.builtin.command: cat /tmp/VR2024.LOG_01iwva_00001
+    - name: obtain script name
+      shell: echo "{{ sn_description }}"|awk '{ print $1 }'
+      register: script
+    - name: show script name
+      debug:
+        msg: "{{ script.stdout }}"
+    - name: connect to system & search for script output
+      shell: grep -R -l "{{ script.stdout }}" /tmp/*
+      register: result
+    - name: show resulting file
+      debug:
+        msg: "{{ result }}"
+    - name: connect to system & get script output
+      ansible.builtin.command: cat "{{ result.stdout }}"
       register: catfile
     - name: obtain servicenow incident
       ansible.builtin.uri:
