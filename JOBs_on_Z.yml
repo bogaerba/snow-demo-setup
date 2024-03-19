@@ -55,14 +55,6 @@
       msg: "{{infoLine.stdout_lines[0]}}"                           # display the complete line that holds IEF450I
 
   - name: update incident
-#    servicenow.itsm.incident:
-#      instance:
-#        host: https://dev213519.service-now.com
-#        username: admin
-#        password: -J0crDV2t@Bm
-#        validate_certs: false
-#      number: "{{ sn_incident }}"
-#      description: "{{infoLine.stdout_lines[0]}}"
     ansible.builtin.uri:
       url: https://dev213519.service-now.com/api/now/table/incident/{{ sn_incident }}
       user: admin
