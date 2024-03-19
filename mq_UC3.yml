@@ -4,18 +4,15 @@
   gather_facts: false
 
   tasks:
-#    - name: Create a new incident
-#      servicenow.itsm.incident:
-#        # Instance data
-#        instance:
-#          host: https://dev213519.service-now.com
-#          username: admin
-#          password: -J0crDV2t@Bm
-#        short_description: A00864WOPA for BO.VERK.STORE.001.STOREWF.COWOAVAILABILSVC
-#      register: sn_incident
+    - name: determine the MQ object
+      shell: echo "{{ short_description }}" | awk '{ print $3 }'
+      register: MQobject
+    - name: show the object
+      debug:
+        msg: "{{ MQobject }}"
     - name: obtain servicenow knowledge article
       ansible.builtin.uri:
-        url: https://dev213519.service-now.com/api/now/table/sn_km_mr_st_kb_knowledge?sysparm_query=short_descriptionLIKEmq&sysparm_fields=content&sysparm_limit=1
+        url: https://dev213519.service-now.com/api/now/table/kb_knowledge?sysparm_query=wikiLIKE{{ MQobject.stdout }}&sysparm_fields=wiki&sysparm_limit=1
         method: GET
         headers:
           Content-Type: application/json
@@ -25,14 +22,19 @@
         body_format: json
         return_content: true
       register: output
+    - name: parse the HTML
+      shell: "xmllint --html - | grep -A1 {{ MQobject.stdout }}"
+      args:
+        stdin: "{{ output.json.result[0].wiki }}"
+      register: parsed_html
     - name: show result
       ansible.builtin.debug:
-        msg: "{{ output.json.result[0].content|split('<br />') }}"
+        msg: "{{ parsed_html.stdout_lines }}"
     - name: update incident
       servicenow.itsm.incident:
         instance:
           host: https://dev213519.service-now.com
           username: admin
           password: -J0crDV2t@Bm
-        number: "{{ sn_incident }}"
-        description: "{{ output.json.result[0].content.split('<br />') }}"
+        number: INC0010062
+        description: "{{ parsed_html.stdout_lines }}"
